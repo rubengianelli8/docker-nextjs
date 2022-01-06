@@ -1,17 +1,34 @@
 import { prisma } from "@/prisma/client";
+import { error } from "./error";
 
 export const demo = {
   getDemo(_parent, { id, name }, _context) {
-    if (id) return prisma.demo.findUnique({ where: { id } });
-    return prisma.demo.findUnique({ where: { name } });
+    try {
+      if (id) return prisma.demo.findUnique({ where: { id } });
+      return prisma.demo.findUnique({ where: { name } });
+    } catch (e) {
+      return error.getError(e);
+    }
   },
   getDemos(_parent, _args, _context) {
-    return prisma.demo.findMany();
+    try {
+      return prisma.demo.findMany();
+    } catch (e) {
+      return error.getError(e);
+    }
   },
   addDemo(_parent, data, _context) {
-    return prisma.demo.create({ data });
+    try {
+      return prisma.demo.create({ data });
+    } catch (e) {
+      return error.getError(e);
+    }
   },
   deleteDemo(_parent, { id }, _context) {
-    return prisma.demo.delete({ where: { id } });
+    try {
+      return prisma.demo.delete({ where: { id } });
+    } catch (e) {
+      return error.getError(e);
+    }
   },
 };

@@ -2,11 +2,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/components/*": ["components/*"],
       "@/prisma/*": ["connectors/prisma/*"],
       "@/models/*": ["models/*"],
-      "@/utils/*": ["utils/*"],
-      "@/redux/*": ["redux/*"]
+      "@/utils/*": ["utils/*"]
     }
   },
   "exclude": ["node_modules"]
