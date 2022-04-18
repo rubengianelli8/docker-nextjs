@@ -2,9 +2,10 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/prisma/*": ["connectors/prisma/*"],
-      "@/models/*": ["models/*"],
-      "@/utils/*": ["utils/*"]
+      "@/prisma/*": ["src/connectors/prisma/*"],
+      "@/models/*": ["src/models/*"],
+      "@/utils/*": ["src/utils/*"],
+      "@/graphql/*": ["src/graphql/*"],
     }
   },
   "exclude": ["node_modules"]

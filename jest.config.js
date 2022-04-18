@@ -8,10 +8,12 @@ const customJestConfig = {
   // setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
   testPathIgnorePatterns: ["<rootDir>/.next", "<rootDir>/node_modules"],
   moduleNameMapper: {
-    "^@/prisma(.*)$": "<rootDir>/connectors/prisma/$1",
-    "^@/models(.*)$": "<rootDir>/models/$1",
-    "^@/pages(.*)$": "<rootDir>/pages/$1",
-    "^@/utils(.*)$": "<rootDir>/utils/$1",
+    "^@/components(.*)$": "<rootDir>/src/components/$1",
+    "^@/containers(.*)$": "<rootDir>/src/containers/$1",
+    "^@/prisma(.*)$": "<rootDir>/src/connectors/prisma/$1",
+    "^@/models(.*)$": "<rootDir>/src//models/$1",
+    "^@/pages(.*)$": "<rootDir>/src/pages/$1",
+    "^@/utils(.*)$": "<rootDir>/src/utils/$1",
   },
 };
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async

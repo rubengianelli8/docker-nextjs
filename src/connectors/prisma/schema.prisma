@@ -1,0 +1,58 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+model str_user {
+  id                         Int                          @id @default(autoincrement())
+  username                   String                       @unique(map: "username") @db.VarChar(150)
+  password                   String                       @db.VarChar(128)
+  firts_name                 String                       @db.VarChar(150)
+  last_name                  String                       @db.VarChar(150)
+  email                      String                       @unique @db.VarChar(150)
+  birth_date                 DateTime                     @db.Date  
+  roles                      str_role_x_user[]
+
+}
+
+model str_role {
+  id                        Int                           @id @default(autoincrement())
+  name                      String                        @unique @db.VarChar(80)
+  description               String                        @db.VarChar(150)
+  users                     str_role_x_user[]
+  permissions               str_permission_x_role[]
+}
+
+model str_permission {
+  id                        Int                           @id @default(autoincrement())
+  name                      String                        @db.VarChar(80)
+  description               String                        @db.VarChar(150)
+  roles                     str_permission_x_role[]
+}
+model str_role_x_user {
+  id                        Int                           @id @default(autoincrement())
+  user                      str_user                      @relation(fields: [id_user], references: [id])
+  role                      str_role                      @relation(fields: [id_role], references: [id])
+  id_role                   Int
+  id_user                   Int
+  created_at                DateTime                      @db.Date
+  updated_at                DateTime                      @db.Date
+  created_by_id             Int
+  updated_by_id             Int
+}
+
+
+model str_permission_x_role {
+  id                        Int                           @id @default(autoincrement())
+  role                      str_role                      @relation(fields: [id_role], references: [id])
+  permission                str_permission                @relation(fields: [id_permission], references: [id])
+  id_role                   Int
+  id_permission             Int
+  created_at                DateTime                      @db.Date
+  updated_at                DateTime                      @db.Date
+  created_by_id             Int
+  updated_by_id             Int
+}

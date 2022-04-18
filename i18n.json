@@ -1,9 +1,0 @@
-{
-  "locales": ["en-US", "es"],
-  "defaultLocale": "es",
-  "localeDetection": true,
-  "pages": {
-    "*": ["common", "errors"],
-    "/": ["index"]
-  }
-}
