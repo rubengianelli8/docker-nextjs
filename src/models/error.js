@@ -2,18 +2,6 @@ import { ApolloError } from "apollo-server-micro";
 import { Error } from "@/utils/errors";
 import { Prisma } from "@prisma/client";
 import { logger } from "@/utils/logger";
-//import { logger, loggerWithConsole } from "@/utils/logger";
-
-const { createLogger, transports } = require("winston");
-
-/* const logger = createLogger({
-  transports: [new transports.File({ filename: "combined.log" })],
-  exceptionHandlers: [new transports.File({ filename: "exceptions.log" })],
-});
-
-const loggerWithConsole = createLogger({
-  transports: [new transports.Console()],
-}); */
 
 export const error = {
   prismaValidationError(error) {
