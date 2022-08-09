@@ -5,8 +5,15 @@ const createJestConfig = nextJest({
 });
 // Add any custom config to be passed to Jest
 const customJestConfig = {
-  // setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
-  testPathIgnorePatterns: ["<rootDir>/.next", "<rootDir>/node_modules"],
+  clearMocks: true,
+  preset: "ts-jest",
+  testEnvironment: "node",
+  setupFilesAfterEnv: ["<rootDir>/src/connectors/prisma/singleton.ts"],
+  testPathIgnorePatterns: [
+    "<rootDir>/.next",
+    "<rootDir>/node_modules",
+    "<rootDir>/src/__tests__/mocks",
+  ],
   moduleNameMapper: {
     "^@/components(.*)$": "<rootDir>/src/components/$1",
     "^@/containers(.*)$": "<rootDir>/src/containers/$1",
@@ -14,6 +21,7 @@ const customJestConfig = {
     "^@/models(.*)$": "<rootDir>/src//models/$1",
     "^@/pages(.*)$": "<rootDir>/src/pages/$1",
     "^@/utils(.*)$": "<rootDir>/src/utils/$1",
+    "^@/mocks(.*)$": "<rootDir>/src/__tests__/mocks/$1",
   },
 };
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
