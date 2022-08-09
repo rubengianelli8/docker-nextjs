@@ -1,4 +1,4 @@
-import { prisma } from "@/prisma/client";
+import prisma from "@/prisma/client";
 import { error } from "./error";
 import { uploadFile } from "@/utils/s3";
 export const uploadFile = {

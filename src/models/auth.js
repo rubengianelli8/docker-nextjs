@@ -1,4 +1,4 @@
-import { prisma } from "@/prisma/client";
+import prisma from "@/prisma/client";
 import { error } from "./error";
 
 export const auth = {
