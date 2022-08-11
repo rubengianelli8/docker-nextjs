@@ -6,6 +6,8 @@
       "@/models/*": ["src/models/*"],
       "@/utils/*": ["src/utils/*"],
       "@/graphql/*": ["src/graphql/*"],
+      "@/swagger/*": ["src/swagger/*"],
+      "@/mocks/*": ["src/__tests__/mocks/*"]
     }
   },
   "exclude": ["node_modules"]

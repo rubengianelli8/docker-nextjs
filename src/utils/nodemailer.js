@@ -1,31 +1,39 @@
-import nodemailer from 'nodemailer';
+import nodemailer from "nodemailer";
 
-const sendEmail = (to, subject, body, html) => {
+export const sendEmail = async ({
+  to,
+  subject,
+  body,
+  template,
+  attachments,
+}) => {
   const callback = (err, info) => {
     if (err) {
-      console.log(err);
+      return err;
     }
-    console.log(info);
+    return info;
   };
   const transporter = nodemailer.createTransport({
-    host: 'mail.tiarg.net',
-    port: 587,
-    secure: false,
+    host: process.env.EMAIL_HOST,
+    port: parseInt(process.env.EMAIL_PORT),
+    secure: process.env.EMAIL_USE_TLS === "true" ? true : false,
     auth: {
-      user: 'noreply@tiarg.net',
-      pass: 'Tiarg2021',
+      user: process.env.EMAIL_HOST_USER,
+      pass: process.env.EMAIL_HOST_PASSWORD,
     },
   });
   transporter.sendMail(
     {
-      from: 'noreply@tiarg.net',
-      to: to,
+      from: process.env.DEFAULT_FROM_EMAIL,
+      to:
+        process.env.NODE_ENV === "development"
+          ? process.env.DEFAULT_TO_EMAIL
+          : to,
       subject: subject,
-      text: html ? null : body,
-      html: html ? body : null,
+      text: template ? null : body,
+      html: template ? template : null,
+      attachments: attachments ? attachments : null,
     },
-    callback,
+    callback
   );
 };
-
-export default sendEmail;
