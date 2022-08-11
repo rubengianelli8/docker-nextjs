@@ -1,13 +1,14 @@
 import { ApolloError } from "apollo-server-micro";
-import { ERRORS } from "@/utils/errors";
+import { Error } from "@/utils/errors";
 import { Prisma } from "@prisma/client";
+import { logger } from "@/utils/logger";
 
 export const error = {
   prismaValidationError(error) {
     if (error instanceof Prisma.PrismaClientValidationError)
       return {
         type: "PrismaClientValidationError",
-        message: error.message,
+        message: "Data validation error",
         code: "P2007",
       };
 
@@ -41,24 +42,36 @@ export const error = {
 
     return false;
   },
-
+  logError(type, code, message, originalError) {
+    let newMessage = `${type}: ${code} - ${message}`;
+    logger.error(newMessage);
+  },
   getError(error) {
-    if (ERRORS[error.code]) {
-      const { type, code, message } = ERRORS[error.code];
-      return new ApolloError(message, code, { type });
+    if (Error[error.code]) {
+      const { type, code, message } = Error[error.code];
+      const messageError = error.message || message;
+      this.handlerError(messageError, code, type, error);
     }
     const prismaError = this.prismaValidationError(error);
     if (prismaError) {
       const { message, type, code } = prismaError;
-      return new ApolloError(message, code, { type });
+      this.handlerError(message, code, type, error);
     }
 
     if (error.code) {
-      const { type } = error;
-      return new ApolloError(error.message, error.code, { type });
+      const { message, type, code } = error;
+      this.handlerError(message, code, { type } || null, error);
     }
 
-    const { message, code, type } = ERRORS.P0;
-    return new ApolloError(message, code, { type });
+    const { message, code, type } = Error.P0;
+    this.handlerError(message, code, type, error);
+  },
+  handlerError(message, code, type, originalError) {
+    process.env.NODE_ENV !== "test" &&
+      this.logError(type, code, message, originalError.message);
+    //retorno de error que maneja el handler
+    throw { code, message };
+    // Si se implementa graphql, vamos a retornar un error de apollo.
+    // return new ApolloError(message, code, { type });
   },
 };
