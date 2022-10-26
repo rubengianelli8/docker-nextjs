@@ -20,7 +20,7 @@ export default function Home() {
       </Head>
 
       <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <h1 className="text-6xl font-bold">{title}2</h1>
+        <h1 className="text-6xl font-bold">{title}1</h1>
         <h2 className="text-6xl font-bold">{subtitle}</h2>
         <h3>asdasd</h3>
       </main>

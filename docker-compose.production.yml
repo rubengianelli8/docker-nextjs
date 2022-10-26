@@ -19,7 +19,7 @@ services:
       - db
     image: docker-nextjs
     build:
-      dockerfile: Dockerfile.production
       context: .
+      dockerfile: Dockerfile.production
     ports:
       - 3000:3000
