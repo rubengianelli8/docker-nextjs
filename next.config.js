@@ -11,10 +11,20 @@ const nextConfig = {
   images: {
     domains: ["platform-lookaside.fbsbx.com"],
   },
+  experimental: {
+    outputStandalone: true,
+  },
   webpack: (config, { isServer, webpack }) => {
     if (isServer) {
       config.externals.push("_http_common");
     }
+    return config;
+  },
+  webpackDevMiddleware: (config) => {
+    config.watchOptions = {
+      poll: 1000,
+      aggregateTimeout: 300,
+    };
     return config;
   },
 };

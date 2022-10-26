@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: "starter"
+      MYSQL_PASSWORD: "root"
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: "root"
+    ports:
+      # <Port exposed> : < MySQL Port running inside container>
+      - "3308:3306"
+    volumes:
+      - ./mysql:/var/lib/mysql
+  app:
+    depends_on:
+      - db
+    image: docker-nextjs
+    build: .
+    ports:
+      - 3000:3000
+    volumes:
+      - ./src:/app/src

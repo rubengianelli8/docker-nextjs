@@ -4,7 +4,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "jest"
+    "test": "jest",
+    "dbpush": "npx prisma db push"
   },
   "prisma": {
     "schema": "./src/connectors/prisma/schema.prisma",
@@ -31,8 +32,8 @@
     "next-translate": "^1.2.0",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.0.2",
+    "react-dom": "^18.0.2",
     "slugify": "^1.6.5",
     "jwt-simple": "^0.5.6",
     "next-compose-plugins": "^2.2.1",
